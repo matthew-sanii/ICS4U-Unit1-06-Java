@@ -1,10 +1,10 @@
 /*
-* This is a program that calculates mean, median and mode
+* This is a program that calculates the mean and median
 * after reading in a text file into an array.
 *
-* @author  Mr Coxall
+* @author  Matthew Sanii
 * @version 1.0
-* @since   2020-01-01
+* @since   2021-25-11
 */
 
 import java.io.BufferedReader;
@@ -43,7 +43,6 @@ final class Statistics {
     * @return the mean of the integers
     */
     public static double mean(final Integer[] arrayOfIntegers) {
-
         return mean;
     }
 
@@ -56,17 +55,6 @@ final class Statistics {
     public static double median(final Integer[] arrayOfIntegers) {
 
         return returnValue;
-    }
-
-    /**
-    * The mode() function.
-    *
-    * @param numbers the collection of integers
-    * @return the mode of the integers
-    */
-    public static List<Integer> mode(final Integer[] numbers) {
-
-        return modes;
     }
 
     /**
@@ -94,16 +82,12 @@ final class Statistics {
         final Integer[] arrayOfNumbers = listOfNumbers.toArray(new Integer[0]);
         System.out.println(Arrays.toString(arrayOfNumbers));
 
-        System.out.println("\nCalculating stats...");
+        System.out.println("\nCalculating mean and median...");
         final double mean = mean(arrayOfNumbers);
         final double median = median(arrayOfNumbers);
-        final List<Integer> mode = mode(arrayOfNumbers);
 
         System.out.println("The mean is: " + mean);
         System.out.println("The median is: " + median);
-        System.out.println("The mode(s) is/are: "
-                            + Arrays.toString(mode.toArray()));
-
         System.out.println("\nDone.");
     }
 }
