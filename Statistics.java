@@ -7,6 +7,7 @@
 * @since   2021-25-11
 */
 
+import java.lang.Math;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -42,7 +43,16 @@ final class Statistics {
     * @param arrayOfIntegers the collection of integers
     * @return the mean of the integers
     */
-    public static double mean(final Integer[] arrayOfIntegers) {
+    public static double mean(final Integer[] arrayOfIntegers, final int totalNumbers) {
+        double mean;
+        Integer[] list = arrayOfIntegers;
+        int sum, i;
+        int max = totalNumbers;
+        sum = 0;
+        for(i = 0; i < totalNumbers; i++) {
+            sum+=list[i];
+    }
+        mean = sum/max;
         return mean;
     }
 
@@ -52,9 +62,12 @@ final class Statistics {
     * @param arrayOfIntegers the collection of integers
     * @return the median of the integers
     */
-    public static double median(final Integer[] arrayOfIntegers) {
-
-        return returnValue;
+    public static double median(final Integer[] arrayOfIntegers, final int totalNumbers) {
+        Integer[] array = arrayOfIntegers;
+        double amount;
+        Arrays.sort(array);
+        amount = array[totalNumbers/2];
+        return amount;
     }
 
     /**
@@ -63,7 +76,9 @@ final class Statistics {
     * @param args No args will be used
     */
     public static void main(final String[] args) {
-        Integer tempNumber;
+        int tempNumber;
+        int total;
+        total = 0;
         final ArrayList<Integer> listOfNumbers = new ArrayList<Integer>();
         final Path filePath = Paths.get("../", args[0]);
         final Charset charset = Charset.forName("UTF-8");
@@ -74,6 +89,7 @@ final class Statistics {
             while ((line = reader.readLine()) != null) {
                 tempNumber = Integer.parseInt(line);
                 listOfNumbers.add(tempNumber);
+                total += 1;
             }
         } catch (IOException errorCode) {
             System.err.println(errorCode);
@@ -83,8 +99,8 @@ final class Statistics {
         System.out.println(Arrays.toString(arrayOfNumbers));
 
         System.out.println("\nCalculating mean and median...");
-        final double mean = mean(arrayOfNumbers);
-        final double median = median(arrayOfNumbers);
+        final double mean = mean(arrayOfNumbers, total);
+        final double median = median(arrayOfNumbers, total);
 
         System.out.println("The mean is: " + mean);
         System.out.println("The median is: " + median);
