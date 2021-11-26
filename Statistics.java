@@ -7,7 +7,6 @@
 * @since   2021-25-11
 */
 
-import java.lang.Math;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -16,9 +15,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
 * This is the statistics program.
@@ -41,18 +37,19 @@ final class Statistics {
     * The mean() function.
     *
     * @param arrayOfIntegers the collection of integers
+    * @param totalNumbers the size of the array of numbers
     * @return the mean of the integers
     */
     public static double mean(final Integer[] arrayOfIntegers, final int totalNumbers) {
-        double mean;
-        Integer[] list = arrayOfIntegers;
-        int sum, i;
-        int max = totalNumbers;
+        final double mean;
+        final Integer[] list = arrayOfIntegers;
+        int sum;
+        int spot;
         sum = 0;
-        for(i = 0; i < totalNumbers; i++) {
-            sum+=list[i];
-    }
-        mean = sum/max;
+        for (spot = 0; spot < totalNumbers; spot++) {
+            sum += list[spot];
+        }
+        mean = sum / totalNumbers;
         return mean;
     }
 
@@ -60,16 +57,18 @@ final class Statistics {
     * The median() function.
     *
     * @param arrayOfIntegers the collection of integers
+    * @param totalNumbers the size of the array of numbers
     * @return the median of the integers
     */
     public static double median(final Integer[] arrayOfIntegers, final int totalNumbers) {
-        Integer[] array = arrayOfIntegers;
-        double amount;
+        final Integer[] array = arrayOfIntegers;
+        final double amount;
         Arrays.sort(array);
-	if (array.length % 2 == 0)
-            amount = ((double)array[totalNumbers/2] + (double)array[totalNumbers/2 - 1])/2;
-	else
-            amount = (double) array[totalNumbers/2];
+        if (totalNumbers % 2 == 0) {
+            amount = ((double) array[totalNumbers / 2] + (double) array[totalNumbers / 2 - 1]) / 2;
+        } else {
+            amount = (double) array[totalNumbers / 2];
+        }
         return amount;
     }
 
@@ -82,17 +81,14 @@ final class Statistics {
         int tempNumber;
         int total;
         total = 0;
-
         final ArrayList<Integer> listOfNumbers = new ArrayList<Integer>();
         final Charset charset = Charset.forName("UTF-8");
 
-	if(!Files.exists(Paths.get(args[0])))
-        {
+        if (!Files.exists(Paths.get(args[0]))) {
             System.err.println("Exiting as file does not exist: " + args[0]);
-            return;
         }
 
-	final Path filePath = Paths.get(args[0]);
+        final Path filePath = Paths.get(args[0]);
         try (BufferedReader reader = Files.newBufferedReader(
                                      filePath, charset)) {
             String line = "hi";
@@ -104,7 +100,7 @@ final class Statistics {
                 } catch (ArrayIndexOutOfBoundsException errorCode) {
                     line = null;
                 }
-        }
+            }
         } catch (IOException errorCode) {
             System.err.println(errorCode);
         }
@@ -119,5 +115,5 @@ final class Statistics {
         System.out.println("The mean is: " + mean);
         System.out.println("The median is: " + median);
         System.out.println("\nDone.");
-    } 
+    }
 }
