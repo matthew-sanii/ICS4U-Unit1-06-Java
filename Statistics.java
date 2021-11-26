@@ -86,8 +86,8 @@ final class Statistics {
 
         if (!Files.exists(Paths.get(args[0]))) {
             System.err.println("Exiting as file does not exist: " + args[0]);
+            System.exit(0);
         }
-
         final Path filePath = Paths.get(args[0]);
         try (BufferedReader reader = Files.newBufferedReader(
                                      filePath, charset)) {
