@@ -66,33 +66,23 @@ final class Statistics {
         Integer[] array = arrayOfIntegers;
         double amount;
         Arrays.sort(array);
-	if (array.length % 2 == 0)
-            amount = ((double)array[totalNumbers/2] + (double)array[totalNumbers/2 - 1])/2;
-	else
-            amount = (double) array[totalNumbers/2];
+        amount = array[totalNumbers/2];
         return amount;
     }
 
     /**
     * The starting main() function.
     *
-    * @param args Name of file containing a string of numbers
+    * @param args No args will be used
     */
     public static void main(final String[] args) {
         int tempNumber;
         int total;
         total = 0;
-
         final ArrayList<Integer> listOfNumbers = new ArrayList<Integer>();
+        final Path filePath = Paths.get("../", args[0]);
         final Charset charset = Charset.forName("UTF-8");
 
-	if(!Files.exists(Paths.get(args[0])))
-        {
-            System.err.println("Exiting as file does not exist: " + args[0]);
-            return;
-        }
-
-	final Path filePath = Paths.get(args[0]);
         try (BufferedReader reader = Files.newBufferedReader(
                                      filePath, charset)) {
             String line = "hi";
@@ -119,5 +109,5 @@ final class Statistics {
         System.out.println("The mean is: " + mean);
         System.out.println("The median is: " + median);
         System.out.println("\nDone.");
-    } 
+    }
 }
